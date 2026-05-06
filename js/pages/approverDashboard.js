@@ -21,7 +21,7 @@ export function renderApproverDashboard() {
     <nav class="navbar">
       <div class="navbar-content">
         <div class="navbar-brand">
-          Access Portal
+          🛡️ Enterprise IAM
         </div>
 
         <div class="navbar-menu">
@@ -79,12 +79,11 @@ export function renderApproverDashboard() {
 
           <div>
             <h1 class="dashboard-title">
-              Access Request Management
+              Enterprise Access Management
             </h1>
 
             <p class="dashboard-subtitle">
-              Review and approve access
-              requests with AI assistance
+              Review and approve access requests with AI-powered risk analysis
             </p>
           </div>
 
@@ -532,6 +531,7 @@ async function loadRequests() {
               <th>Risk / AI Score</th>
               <th>Status</th>
               <th>Submitted</th>
+              <th>⏱️ Access Duration</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -627,6 +627,10 @@ async function loadRequests() {
                   ${formatDate(
           req.createdAt
         )}
+                </td>
+
+                <td>
+                  ${getDurationBadge(req.expiryDays, req.expiryDate)}
                 </td>
 
                 <td>
@@ -733,6 +737,18 @@ async function handleReject(btn) {
     showAlert(error.message, 'error');
     setButtonLoading(btn, false);
   }
+}
+
+// ─── Duration Badge ──────────────────────────────────────────────────────────
+function getDurationBadge(expiryDays, expiryDate) {
+  if (expiryDate) {
+    const days = Math.ceil((new Date(expiryDate) - new Date()) / 86400000);
+    return `<span class="duration-badge"><span class="clock-icon">🕐</span>${days > 0 ? `${days} days left` : 'Expired'}</span>`;
+  }
+  if (expiryDays) {
+    return `<span class="duration-badge"><span class="clock-icon">⏱️</span>${expiryDays} days</span>`;
+  }
+  return `<span class="duration-badge"><span class="clock-icon">♾️</span>Permanent</span>`;
 }
 
 // ─── Risk Badge ───────────────────────────────────────────────────────────────

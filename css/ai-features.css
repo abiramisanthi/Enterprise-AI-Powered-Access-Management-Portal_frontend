@@ -286,16 +286,16 @@
     to   { transform: translateX(0); opacity: 1; }
 }
 
-/* Notification dropdown */
 .notif-dropdown {
     position: absolute;
     top: calc(100% + 8px);
     right: 0;
     width: 340px;
-    background: #fff;
+    background: rgba(21,21,33,0.97);
     border-radius: 14px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-    border: 1px solid #e5e7eb;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(112,71,235,0.1);
+    border: 1px solid rgba(112,71,235,0.3);
+    backdrop-filter: blur(20px);
     z-index: 1000;
     overflow: hidden;
     animation: fadeDropdown 0.2s ease;
@@ -306,38 +306,41 @@
 }
 .notif-header {
     padding: 14px 18px;
-    border-bottom: 1px solid #f0f0f0;
+    background: linear-gradient(135deg, rgba(112,71,235,0.3), rgba(216,91,243,0.2));
+    border-bottom: 1px solid rgba(255,255,255,0.06);
     font-weight: 700;
     font-size: 0.9rem;
-    color: #1e293b;
+    color: #fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 .notif-clear {
     font-size: 0.75rem;
-    color: #6366f1;
+    color: #a78bfa;
     cursor: pointer;
     font-weight: 500;
     background: none;
     border: none;
+    transition: color 0.2s;
 }
+.notif-clear:hover { color: #fff; }
 .notif-list { max-height: 320px; overflow-y: auto; }
 .notif-item {
     padding: 12px 18px;
-    border-bottom: 1px solid #f9fafb;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
     font-size: 0.85rem;
-    color: #374151;
+    color: #e2e8f0;
     display: flex;
     gap: 10px;
     align-items: flex-start;
     transition: background 0.2s;
 }
-.notif-item:hover { background: #f8fafc; }
-.notif-item.unread { background: #ede9fe; }
+.notif-item:hover { background: rgba(255,255,255,0.04); }
+.notif-item.unread { background: rgba(112,71,235,0.15); border-left: 3px solid #a78bfa; padding-left: 15px; }
 .notif-item .notif-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
-.notif-item .notif-time { font-size: 0.72rem; color: #9ca3af; margin-top: 3px; }
-.notif-empty { padding: 24px; text-align: center; color: #9ca3af; font-size: 0.875rem; }
+.notif-item .notif-time { font-size: 0.72rem; color: #a78bfa; margin-top: 3px; }
+.notif-empty { padding: 24px; text-align: center; color: var(--text-secondary); font-size: 0.875rem; }
 
 /* ── AI Chatbot ──────────────────────────────────────────────────────── */
 .chatbot-toggle {

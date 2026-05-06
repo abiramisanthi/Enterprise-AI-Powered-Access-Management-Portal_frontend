@@ -1,5 +1,6 @@
 // API base URL
-const API_URL = 'https://fsd05-backend-3.onrender.com';
+// const API_URL = 'https://fsd05-backend-3.onrender.com'; // ← production (Render)
+const API_URL = 'http://localhost:5000'; // ← local development
 
 class API {
     // Get auth token from localStorage

@@ -8,6 +8,7 @@ import { renderAuditLog } from './pages/auditLog.js';
 
 import chatbot from './components/chatbot.js';
 import notifications from './components/notifications.js';
+import aiAssistant from './components/aiAssistant.js';
 import auth from './auth.js';
 
 // ================= ROUTES =================
@@ -25,55 +26,24 @@ router.init();
 
 // ================= ROUTE CONTROL =================
 
-const publicRoutes = [
-    '/',
-    '/login',
-    '/register'
-];
+const publicRoutes = ['/', '/login', '/register'];
 
 function initRealtimeFeatures() {
+    const currentRoute = window.location.pathname;
 
-    const currentRoute =
-        window.location.pathname;
-
-    // If user is authenticated AND not on public page
-    if (
-        auth.isAuthenticated() &&
-        !publicRoutes.includes(currentRoute)
-    ) {
-
-        console.log(
-            "Initializing chatbot and notifications"
-        );
-
+    if (auth.isAuthenticated() && !publicRoutes.includes(currentRoute)) {
         chatbot.init();
         notifications.init();
-
+        aiAssistant.init();
+    } else {
+        if (chatbot.destroy)     chatbot.destroy();
+        if (notifications.destroy) notifications.destroy();
+        if (aiAssistant.destroy) aiAssistant.destroy();
     }
-
-    else {
-
-        console.log(
-            "Destroying chatbot and notifications"
-        );
-
-        if (chatbot.destroy) {
-            chatbot.destroy();
-        }
-
-        if (notifications.destroy) {
-            notifications.destroy();
-        }
-
-    }
-
 }
 
 // Run once on page load
 initRealtimeFeatures();
 
 // Listen for navigation changes
-window.addEventListener(
-    'popstate',
-    initRealtimeFeatures
-);
+window.addEventListener('popstate', initRealtimeFeatures);

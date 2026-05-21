@@ -34,7 +34,16 @@ https://fsd05-backend-3.onrender.com
 - ⚡ Real-Time Request Tracking
 
 ---
+Key implementation highlights:
 
+- Built scalable backend services using Node.js and Express
+- Designed modular APIs with controllers, middleware, and service layers
+- Dockerized multi-service architecture using Docker and Docker Compose
+- Implemented JWT authentication and secure route protection
+- Integrated AI and machine learning services through dedicated modules
+- Structured for future scalability and microservice-based expansion
+- Version controlled with Git for collaborative development workflows
+---
 # 🛠️ Tech Stack
 
 ## Frontend
